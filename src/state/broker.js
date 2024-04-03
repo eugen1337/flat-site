@@ -1,33 +1,41 @@
 import { useDispatch, useSelector } from "react-redux";
-import { setLogin, setPassword } from "../redux/slice/authReducer.js";
+import {
+    setLogin as setLoginAction,
+    setPassword as setPasswordAction,
+    getToken as getTokenAction,
+} from "../redux/slices/authReducer.js";
 import store from "../redux/store.js";
 
 export function useLoginListener() {
-    return useSelector((state) => state.login);
+    return useSelector((state) => state.auth.login);
 }
 
 export function useLoginDispatcher() {
     const dispatch = useDispatch();
-    return (login) => dispatch(setLogin(login));
+    return (login) => dispatch(setLoginAction(login));
 }
 
 export function usePasswordListener() {
-    return useSelector((state) => state.password);
+    return useSelector((state) => state.auth.password);
 }
 
 export function usePasswordDispatcher() {
     const dispatch = useDispatch();
-    return (password) => dispatch(setPassword(password));
+    return (password) => dispatch(setPasswordAction(password));
 }
 
-// export function useTokenListener() {
-//     return useSelector((state) => state.token);
-// }
+export function useGetToken() {
+    const dispatch = useDispatch();
+    return () => dispatch(getTokenAction(""));
+}
 
-// export function useTokenDispatcher() {
-//     const dispatch = useDispatch();
-//     return (token) => dispatch(ACTIONS_CREATORS.UPDATE("token", token));
-// }
+export function useTokenListener() {
+    return useSelector((state) => state.auth.token);
+}
+
+export function useTokenStatusListener() {
+    return useSelector((state) => state.auth.status);
+}
 
 // export function useGetToken() {
 //     const dispatch = useDispatch();

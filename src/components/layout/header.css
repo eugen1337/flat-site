@@ -1,9 +1,9 @@
 .header {
-    height: 100px;
+    height: 80px;
 }
 
 header {
-    height: 90px;
+    height: 70px;
     position: absolute;
     top: 0;
     left: 0;
@@ -18,9 +18,36 @@ header {
 header h1 {
     font-family: "Bradley Hand", cursive;
     color: rgb(41, 30, 30);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  text-align: center;
 }
 
 header nav {
+    display: flex;
+    justify-content: center;
     padding: 5px;
     padding-right: 20px;
+}
+
+.menu ul {
+    flex-direction: column;
+    justify-content: center;
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    /* background-color: #f1f1f1; */
+}
+
+.menu li a {
+    display: block;
+    color: #000;
+    width: 80px;
+}
+
+.menu li a:hover {
+    /* background-color: #555; */
+    color: white;
 }

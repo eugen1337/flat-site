@@ -7,7 +7,10 @@ import {
     useLoginListener,
     usePasswordDispatcher,
     usePasswordListener,
+    useTokenListener,
+    useTokenStatusListener,
 } from "../../state/broker.js";
+import { useEffect, useState } from "react";
 
 export default function LoginForm(props) {
     const navigate = useNavigate();
@@ -18,14 +21,28 @@ export default function LoginForm(props) {
     const password = usePasswordListener();
     const passwordDispatch = usePasswordDispatcher();
 
-    // const getToken = useGetToken();
+    const getToken = useGetToken();
+    const token = useTokenListener();
+    const status = useTokenStatusListener();
 
-    const queryLogin = async () => {
-        // const res = await getToken();
+    const [reRender, setReRender] = useState(false);
 
-        // if (res) {
-        //     navigate("/tasks");
-        // } else console.log("token is null");
+    // if (token !== "") {
+    //     console.log(token)
+    //     setReRender(true);
+    // }
+
+    useEffect(() => {
+        console.log("useEffect");
+        if (status === "OK") navigate("/main-page");
+        else if (status === "BAD") {
+            console.log("bad status");
+            alert(token);
+        }
+    }, [token, status]);
+
+    const queryLogin = () => {
+        getToken();
     };
 
     const queryRegister = async () => {
