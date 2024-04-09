@@ -3,7 +3,6 @@ import StartPage from "./pages/start-page";
 import LoginPage from "./pages/login-page";
 import MainPage from "./pages/main-page";
 import buildProvider from "./state/builder";
-import Header from "./components/layout/header";
 
 const Provider = buildProvider();
 

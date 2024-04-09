@@ -10,7 +10,7 @@ import {
     useTokenListener,
     useTokenStatusListener,
 } from "../../state/broker.js";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 export default function LoginForm(props) {
     const navigate = useNavigate();
@@ -25,13 +25,6 @@ export default function LoginForm(props) {
     const token = useTokenListener();
     const status = useTokenStatusListener();
 
-    const [reRender, setReRender] = useState(false);
-
-    // if (token !== "") {
-    //     console.log(token)
-    //     setReRender(true);
-    // }
-
     useEffect(() => {
         console.log("useEffect");
         if (status === "OK") navigate("/main-page");
@@ -42,19 +35,11 @@ export default function LoginForm(props) {
     }, [token, status]);
 
     const queryLogin = () => {
-        getToken();
+        getToken("login");
     };
 
-    const queryRegister = async () => {
-        const isLogged = await (
-            await import("../../transport/api.js")
-        ).register({
-            username: login,
-            password: password,
-        });
-        if (isLogged) {
-            navigate("/tasks");
-        }
+    const queryRegister = () => {
+        getToken("register");
     };
 
     return (

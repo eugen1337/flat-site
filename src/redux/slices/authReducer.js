@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { login } from "../../transport/api";
 
 const initialState = {
     login: "",
@@ -12,21 +11,21 @@ const initialState = {
 
 const getToken = createAsyncThunk(
     "authSlice/getToken",
-    async (empty, thunkAPI) => {
-        console.log(thunkAPI.getState())
-        console.log(thunkAPI.getState().auth.login)
+    async (option, thunkAPI) => {
         const user = {
             login: thunkAPI.getState().auth.login,
             password: thunkAPI.getState().auth.password,
         };
-        const result = await login(user);
+        const result = await (
+            await import("../../transport/api.js")
+        )[option](user);
+
         const jsonRes = JSON.parse(result);
 
         if (jsonRes.status === "OK") {
             return jsonRes.token;
         }
         return thunkAPI.rejectWithValue(jsonRes.status);
-        
     }
 );
 

@@ -26,9 +26,9 @@ export async function login({ login, password }) {
     return result;
 }
 
-export async function register({ username, password }) {
+export async function register({ login, password }) {
     console.log("fetch /register");
-    let data = { login: username, password: password };
+    let data = { login: login, password: password };
 
     const result = await getResponse(`${baseUrl}/login`, {
         method: "POST",
