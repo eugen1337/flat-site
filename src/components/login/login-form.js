@@ -26,13 +26,12 @@ export default function LoginForm(props) {
     const status = useTokenStatusListener();
 
     useEffect(() => {
-        console.log("useEffect");
         if (status === "OK") navigate("/main-page");
         else if (status === "BAD") {
             console.log("bad status");
             alert(token);
         }
-    }, [token, status]);
+    }, [token, status, navigate]);
 
     const queryLogin = () => {
         getToken("login");

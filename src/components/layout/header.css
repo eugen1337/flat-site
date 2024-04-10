@@ -31,23 +31,26 @@ header nav {
     padding-right: 20px;
 }
 
-.menu ul {
+.menu {
     flex-direction: column;
     justify-content: center;
     display: flex;
     list-style-type: none;
     margin: 0;
-    padding: 0;
+    padding: 5px;
     /* background-color: #f1f1f1; */
 }
+.menu div {
+    margin: 3px;
+}
 
-.menu li a {
+.menu a {
     display: block;
     color: #000;
     width: 80px;
 }
 
-.menu li a:hover {
+.menu a:hover {
     /* background-color: #555; */
     color: white;
 }

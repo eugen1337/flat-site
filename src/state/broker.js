@@ -3,6 +3,7 @@ import {
     setLogin as setLoginAction,
     setPassword as setPasswordAction,
     getToken as getTokenAction,
+    resetUserInfo,
 } from "../redux/slices/authReducer.js";
 import store from "../redux/store.js";
 
@@ -35,4 +36,9 @@ export function useTokenListener() {
 
 export function useTokenStatusListener() {
     return useSelector((state) => state.auth.status);
+}
+
+export function useResetUserInfo() {
+    const dispatch = useDispatch();
+    return () => dispatch(resetUserInfo());
 }
