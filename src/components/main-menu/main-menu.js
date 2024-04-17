@@ -1,9 +1,34 @@
+import "./style.css";
+
 export default function Menu(props) {
     return (
         <>
-            <button onClick={props.createSquare} >квадрат</button>
-            <button onClick={props.clear} >очистить</button>
-            <button onClick={props.send} >отправить данные</button>
+            
+            <label className="control-input">
+                длина комнаты
+                <input
+                    value={props.length}
+                    onChange={(event) => props.setLength(event.target.value)}
+                />
+            </label>
+            <label className="control-input">
+                ширина комнаты
+                <input
+                    value={props.width}
+                    onChange={(event) => props.setWidth(event.target.value)}
+                />
+            </label>
+            <button className="control-button" onClick={props.createSquare}>
+                создать прямоугольник
+            </button>
+            <br/>
+            <button className="control-button" onClick={props.clear}>
+                очистить
+            </button>
+            <br/>
+            <button className="control-button" onClick={props.send}>
+                отправить данные
+            </button>
         </>
     );
 }
