@@ -2,10 +2,10 @@
     background: url("../../../public/back.jpg") no-repeat;
 } */
 
-body {
-    /* background-image: url("../../../public/back.jpg"); */
-    background-size: 100%;
-}
+/* body {
+    background-image: url("../../../public/back.jpg");
+    background-size: 70%;
+} */
 
 .wrapper {
     margin: 0 auto;

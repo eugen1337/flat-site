@@ -42,3 +42,18 @@ export async function register({ login, password }) {
     return result;
 }
 
+export async function send({ token, data }) {
+    console.log("fetch /plans");
+
+    const result = await getResponse(`${baseUrl}/plans/rooms`, {
+        method: "POST",
+        headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+    });
+
+    console.log(result);
+    return result;
+}

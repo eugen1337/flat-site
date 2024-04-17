@@ -5,7 +5,11 @@ import {
     getToken as getTokenAction,
     resetUserInfo,
 } from "../redux/slices/authReducer.js";
-import store from "../redux/store.js";
+import {
+    incrementId,
+    setRoom as setRoomAction,
+    sendPlan as sendPlanAction,
+} from "../redux/slices/planReducer.js";
 
 export function useLoginListener() {
     return useSelector((state) => state.auth.login);
@@ -41,4 +45,27 @@ export function useTokenStatusListener() {
 export function useResetUserInfo() {
     const dispatch = useDispatch();
     return () => dispatch(resetUserInfo());
+}
+
+export function useGetId() {
+    return useSelector((state) => state.plan.id);
+}
+
+export function useIncrementId() {
+    const dispatch = useDispatch();
+    return () => dispatch(incrementId());
+}
+
+export function useSendPlan() {
+    const dispatch = useDispatch();
+    return () => dispatch(sendPlanAction());
+}
+
+export function useRoomListener() {
+    return useSelector((state) => state.plan.room);
+}
+
+export function useRoomDispatcher() {
+    const dispatch = useDispatch();
+    return (room) => dispatch(setRoomAction(room));
 }

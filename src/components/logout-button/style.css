@@ -6,6 +6,11 @@
     justify-content: space-between;
 }
 
+.logout-box span {
+    color: rgb(255, 255, 255);
+    font-size: large;
+}
+
 .logout-box button {
     border-radius: 10px;
     border: 1px solid red;
