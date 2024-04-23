@@ -18,7 +18,7 @@ export default function Canvas() {
 
     // baseurl
     const [ready, val, sendWs] = useWs(
-        "ws://localhost:8080/" + "flat-app-1.0-SNAPSHOT/v1" + "/counter"
+        "ws://localhost:8080/" + "flat-app-1.0-SNAPSHOT" + "/testEcho"
     );
 
     useEffect(() => {
