@@ -1,5 +1,6 @@
 import { Stage, Layer } from "react-konva";
 import Menu from "../main-menu/main-menu";
+import { Html } from "react-konva-utils";
 import { useState, useEffect } from "react";
 import {
     useGetId,
@@ -10,20 +11,24 @@ import {
 
 import { useWs } from "../../ws";
 import Room from "../room/room";
+import ToolBar from "../tool-bar/tool-bar";
+import MessageBox from "../message-box/message-box";
 
 export default function Canvas() {
     const [squares, setSquares] = useState([]);
     const [length, setLength] = useState(0);
     const [width, setWidth] = useState(0);
 
+    const [usedTool, setUsedTool] = useState("room");
+
     // baseurl
     const [ready, val, sendWs] = useWs(
-        "ws://localhost:8080/" + "flat-app-1.0-SNAPSHOT" + "/testEcho"
+        "ws://localhost:8080/" + "flat-app-1.0-SNAPSHOT" + "/ws"
     );
 
     useEffect(() => {
         if (ready) {
-            sendWs("test message");
+            sendWs("admin");
         }
     }, [ready, sendWs]);
 
@@ -66,16 +71,23 @@ export default function Canvas() {
         <>
             <Menu
                 createSquare={createSquare}
-                clear={clear}
-                send={send}
                 length={length}
                 width={width}
                 setLength={setLength}
                 setWidth={setWidth}
             ></Menu>
-            <label>messages: {val}</label>
+
             <Stage width={window.innerWidth} height={window.innerHeight}>
                 <Layer>
+                    <Html>
+                        <ToolBar
+                            usedTool={usedTool}
+                            clear={clear}
+                            send={send}
+                            setTool={setUsedTool}
+                        ></ToolBar>
+                        <MessageBox message={val}></MessageBox>
+                    </Html>
                     {squares.map((square) => (
                         <Room key={square.id} square={square}></Room>
                     ))}

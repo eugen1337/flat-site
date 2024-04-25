@@ -2,7 +2,7 @@ import { Rect, Text } from "react-konva";
 import { useState } from "react";
 
 export default function Room(props) {
-    const [coords, setCoords] = useState([100, 100]);
+    const [coords, setCoords] = useState([400, 100]);
 
     return (
         <>

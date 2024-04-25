@@ -1,11 +1,13 @@
 import "./style.css";
 
 export default function Menu(props) {
+    
+
     return (
         <>
             
             <label className="control-input">
-                длина комнаты
+                длина комнаты 
                 <input
                     value={props.length}
                     onChange={(event) => props.setLength(event.target.value)}
@@ -22,13 +24,7 @@ export default function Menu(props) {
                 создать прямоугольник
             </button>
             <br/>
-            <button className="control-button" onClick={props.clear}>
-                очистить
-            </button>
-            <br/>
-            <button className="control-button" onClick={props.send}>
-                отправить данные
-            </button>
+
         </>
     );
 }

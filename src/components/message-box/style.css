@@ -1,0 +1,48 @@
+.message-box {
+    text-align: center;
+    border-radius: 10px;
+    background-color: rgb(180, 245, 120);
+    border: 2px solid black;
+    margin: 10px;
+    padding: 10px;
+    width: 150px;
+    display: inline flex;
+    flex-direction: column;
+    flex-flow: column;
+}
+
+.message-header {
+    font-size: 35px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.message {
+    border-radius: 20px;
+    padding: 10px;
+    border: 1px solid black;
+    background-color: rgb(98, 170, 31);
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+@keyframes bounce {
+	0%, 20%, 60%, 100% {
+		transform: translateY(0);
+		transform: translateY(0);
+	}
+
+	40% {
+		transform: translateY(-20px);
+		transform: translateY(-20px);
+	}
+
+	80% {
+		transform: translateY(-10px);
+		transform: translateY(-10px);
+	}
+}
+
+.message:hover {
+    animation: bounce 1s;
+}
