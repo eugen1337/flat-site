@@ -1,0 +1,25 @@
+.center {
+    // position: absolute;
+    // top: 50%;
+    // left: 50%;
+    // transform: translate(-50%, -50%);
+    text-align: center;
+    padding: 10px;
+
+    button {
+        font-size: 40px;
+        height: 200px;
+        width: 200px;
+        border-radius: 50%;
+        border: 3px solid black;
+
+        &::before {
+            content: "I'm ready to start";
+        }
+
+        &:hover::before {
+            background-color: aliceblue;
+            content: "GO!";
+        }
+    }
+}

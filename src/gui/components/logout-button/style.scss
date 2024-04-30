@@ -1,0 +1,19 @@
+.logout-box {
+    display: flex;
+    height: 100%;
+    margin: auto;
+    width: 200px;
+    justify-content: space-between;
+    color: white;
+
+    span {
+        color: rgb(255, 255, 255);
+        font-size: large;
+    }
+
+    button {
+        border-radius: 10px;
+        border: none;
+        background-color: rgb(73, 15, 180);
+    }
+}

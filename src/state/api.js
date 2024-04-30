@@ -4,12 +4,12 @@ import {
     setPassword as setPasswordAction,
     getToken as getTokenAction,
     resetUserInfo,
-} from "../redux/slices/authReducer.js";
+} from "./redux/slices/authReducer.js";
 import {
     incrementId,
     setRoom as setRoomAction,
     sendPlan as sendPlanAction,
-} from "../redux/slices/planReducer.js";
+} from "./redux/slices/planReducer.js";
 
 export function useLoginListener() {
     return useSelector((state) => state.auth.login);

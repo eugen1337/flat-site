@@ -1,7 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import StartPage from "./pages/start-page";
-import LoginPage from "./pages/login-page";
-import MainPage from "./pages/main-page";
+
+import StartPage from "./gui/pages/start-page/start-page";
+import LoginPage from "./gui/pages/login-page/login-page";
+import MainPage from "./gui/pages/main-page/main-page";
 import buildProvider from "./state/builder";
 
 const Provider = buildProvider();
