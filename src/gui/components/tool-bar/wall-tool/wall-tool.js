@@ -1,6 +1,6 @@
 import "./style.css";
 
-export default function RoomTool(props) {
+export default function WallTool(props) {
     return (
         <>
             <label className="control-input">

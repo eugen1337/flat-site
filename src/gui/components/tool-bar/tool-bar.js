@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./style.css";
+import "./style.scss";
 import RoomTool from "./room-tool/room-tool";
 
 export default function ToolBar(props) {
@@ -21,10 +21,10 @@ export default function ToolBar(props) {
             </select>
             <span className="used-tool">{}</span>
             <button className="control-button" onClick={props.clear}>
-                очистить
+                clear
             </button>
-            <button className="control-button" onClick={props.send}>
-                отправить данные
+            <button className="control-button" onClick={props.create}>
+                create
             </button>
         </span>
     );

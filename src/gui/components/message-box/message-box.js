@@ -10,7 +10,7 @@ export default function MessageBox(props) {
                     <label>test message</label>
                 </span>
                 <span className="message">
-                    <label>{props.message}</label>
+                    <label>{props.time}</label>
                 </span>
             </span>
         </>
