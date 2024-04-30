@@ -1,0 +1,15 @@
+.send-button {
+    position: absolute;
+    border: none;
+    background-color: rgb(119, 0, 255);
+    height: 40px;
+    width: 150px;
+    border-radius: 20px;
+    right: 10px;
+    bottom: 10px;
+
+    &:hover {
+        background-color: rgb(119, 0, 255);
+        filter: invert(100%);
+    }
+}

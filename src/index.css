@@ -8,3 +8,7 @@ body {
     color: #242424;
     background: #fff;
 }
+
+.main {
+    height: 100%;
+}

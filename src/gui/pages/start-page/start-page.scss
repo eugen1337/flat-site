@@ -1,11 +1,12 @@
 .overview {
+    height: calc(100% - 150px);
+    
     margin: auto;
     padding: 50px;
-    min-height: calc(100% - 50px);
-    // background-image: url("../../public/back1.jpg");
-    // background-repeat: no-repeat;
-    // background-size: 500px;
-    // background-position: -40px 0px;
+
+    background-image: url("../../../../public/back_new.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
 
     h1 {
         text-align: center;
@@ -14,5 +15,4 @@
     p {
         text-align: center;
     }
-    
 }
