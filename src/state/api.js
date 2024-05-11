@@ -10,6 +10,7 @@ import {
     setRoom as setRoomAction,
     sendPlan as sendPlanAction,
 } from "./redux/slices/planReducer.js";
+import { sendRoom } from "../transport/api.js";
 
 export function useLoginListener() {
     return useSelector((state) => state.auth.login);
@@ -68,4 +69,9 @@ export function useRoomListener() {
 export function useRoomDispatcher() {
     const dispatch = useDispatch();
     return (room) => dispatch(setRoomAction(room));
+}
+
+export function useGetArea() {
+    const token = useSelector((state) => state.auth.token);
+    return (length, width) => sendRoom({ token: token, length, width });
 }

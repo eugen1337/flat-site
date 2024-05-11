@@ -10,7 +10,7 @@ export default function WallTool(props) {
                     onChange={(event) => props.setLength(event.target.value)}
                 />
             </label>
-            <button className="control-button" onClick={props.createSquare}>
+            <button className="control-button" onClick={props.createWall}>
                 создать стену
             </button>
         </>

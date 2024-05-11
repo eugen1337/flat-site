@@ -12,6 +12,7 @@ import {
     useLoginListener,
     useRoomDispatcher,
     useSendPlan,
+    useGetArea,
 } from "../../../state/api";
 
 import { useWs } from "../../../transport/ws";
@@ -21,14 +22,17 @@ import MessageBox from "../message-box/message-box";
 
 import "./style.scss";
 
+const Toolbox = (props) => {
+    return <span className="tool-box">{props.children}</span>;
+};
+
 export default function Canvas() {
     const [squares, setSquares] = useState([]);
     const [length, setLength] = useState(0);
     const [width, setWidth] = useState(0);
     const [time, setTime] = useState("");
-    const [area, setArea] = useState("");
 
-    const [createTool, setCreateTool] = useState(() => {});
+    const [isToolActive, setIsToolActive] = useState(false);
     const [usedTool, setUsedTool] = useState("room");
 
     // baseurl
@@ -41,6 +45,7 @@ export default function Canvas() {
 
     const sendPlan = useSendPlan();
     const setRoom = useRoomDispatcher();
+    const getArea = useGetArea();
 
     const login = useLoginListener();
 
@@ -54,12 +59,14 @@ export default function Canvas() {
         if (ready) {
             console.log(val);
             const result = JSON.parse(val);
-            if (result.date) setTime(result.date);
-            if (result.area) setArea(result.area);
+            setTime(result.date ?? "");
+            if (result.area) {
+                createSquare(result.area);
+            }
         }
     }, [val]);
 
-    const createSquare = () => {
+    const createSquare = (area) => {
         incrementId();
         setSquares([
             ...squares,
@@ -67,9 +74,31 @@ export default function Canvas() {
                 id,
                 length,
                 width,
+                area,
             },
         ]);
-        setCreateTool(() => {});
+        console.log({
+            id,
+            length,
+            width,
+            area,
+        })
+        setIsToolActive(false);
+    };
+
+    const createWall = () => {
+        // incrementId();
+        // setSquares([
+        //     ...squares,
+        //     {
+        //         id,
+        //         length,
+        //         width,
+        //     },
+        // ]);
+        // getArea(length, width);
+
+        setIsToolActive(false);
     };
 
     const clear = () => {
@@ -90,7 +119,7 @@ export default function Canvas() {
     };
 
     const create = async () => {
-        if (usedTool === "room") setCreateTool();
+        setIsToolActive(true);
     };
 
     return (
@@ -114,15 +143,34 @@ export default function Canvas() {
                     ))}
                 </Layer>
             </Stage>
-            {usedTool === "room" && (
-                <RoomTool
-                    createSquare={createSquare}
-                    length={length}
-                    width={width}
-                    setLength={setLength}
-                    setWidth={setWidth}
-                ></RoomTool>
-            )}
+            <Toolbox>
+                {usedTool === "room" && isToolActive && (
+                    <RoomTool
+                        createSquare={() => getArea(length, width)}
+                        length={length}
+                        width={width}
+                        setLength={setLength}
+                        setWidth={setWidth}
+                        onClose={() => {
+                            setLength(0);
+                            setWidth(0);
+                            setIsToolActive(false);
+                        }}
+                    ></RoomTool>
+                )}
+                {usedTool === "wall" && isToolActive && (
+                    <WallTool
+                        createWall={createWall}
+                        length={length}
+                        setLength={setLength}
+                        onClose={() => {
+                            setLength(0);
+                            setWidth(0);
+                            setIsToolActive(false);
+                        }}
+                    ></WallTool>
+                )}
+            </Toolbox>
             <button className="send-button" onClick={send}>
                 Save data
             </button>

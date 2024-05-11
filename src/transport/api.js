@@ -57,3 +57,20 @@ export async function send({ token, data }) {
     console.log(result);
     return result;
 }
+
+export async function sendRoom({ token, length, width }) {
+    console.log("fetch /plans/area");
+
+    const result = await getResponse(
+        `${baseUrl}/plans/area?length=${length}&width=${width}`,
+        {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        }
+    );
+
+    console.log(result);
+    return result;
+}

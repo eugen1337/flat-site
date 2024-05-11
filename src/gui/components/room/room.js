@@ -46,6 +46,16 @@ export default function Room(props) {
                 align="center"
                 verticalAlign="middle"
             />
+            <Text
+                text={"S²:" + props.square.area}
+                x={coords[0] + 10}
+                y={coords[1] + 10}
+                fill="blue"
+                fontStyle={"bold"}
+                fontSize={15}
+                align="center"
+                verticalAlign="middle"
+            />
         </>
     );
 }
