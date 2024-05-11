@@ -19,38 +19,38 @@ export default function Room(props) {
                 }}
             />
             <Text
-                text={props.square.length}
+                text={props.square.length + "см"}
                 x={coords[0] + props.square.length / 4 - 10}
                 y={coords[1] - 15}
                 align="center"
                 verticalAlign="middle"
             />
             <Text
-                text={props.square.length}
+                text={props.square.length + "см"}
                 x={coords[0] + props.square.length / 4 - 10}
                 y={coords[1] + props.square.width / 2 + 10}
                 align="center"
                 verticalAlign="middle"
             />
             <Text
-                text={props.square.width}
-                x={coords[0] - 25}
+                text={props.square.width + "см"}
+                x={coords[0] - 35}
                 y={coords[1] + props.square.width / 4}
                 align="center"
                 verticalAlign="middle"
             />
             <Text
-                text={props.square.width}
+                text={props.square.width + "см"}
                 x={coords[0] + props.square.length / 2 + 5}
                 y={coords[1] + props.square.width / 4}
                 align="center"
                 verticalAlign="middle"
             />
             <Text
-                text={"S²:" + props.square.area}
+                text={"S²:" + props.square.area + "м²"}
                 x={coords[0] + 10}
                 y={coords[1] + 10}
-                fill="blue"
+                fill="#00003d"
                 fontStyle={"bold"}
                 fontSize={15}
                 align="center"

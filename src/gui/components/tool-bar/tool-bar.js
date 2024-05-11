@@ -1,6 +1,5 @@
 import { useState } from "react";
 import "./style.scss";
-import RoomTool from "./room-tool/room-tool";
 
 export default function ToolBar(props) {
     const [tools, setTools] = useState(["room", "wall"]);

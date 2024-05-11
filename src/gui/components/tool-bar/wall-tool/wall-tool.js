@@ -2,9 +2,9 @@ import "./style.css";
 
 export default function WallTool(props) {
     return (
-        <>
+        <span className="tool">
             <label className="control-input">
-                длина
+                длина(в см)
                 <input
                     value={props.length}
                     onChange={(event) => props.setLength(event.target.value)}
@@ -13,6 +13,6 @@ export default function WallTool(props) {
             <button className="control-button" onClick={props.createWall}>
                 создать стену
             </button>
-        </>
+        </span>
     );
 }

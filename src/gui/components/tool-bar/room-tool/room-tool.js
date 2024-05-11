@@ -2,13 +2,12 @@ import "./style.scss";
 
 export default function RoomTool(props) {
     return (
-        <>
+        <span className="tool">
             <label className="control-input">
-                длина
+                длина(в см)
                 <input
                     value={props.length}
                     onChange={(event) => {
-                        console.log(event.target.value);
                         props.setLength(event.target.value);
                     }}
                     type="number"
@@ -18,7 +17,7 @@ export default function RoomTool(props) {
                 />
             </label>
             <label className="control-input">
-                ширина
+                ширина(в см)
                 <input
                     value={props.width}
                     onChange={(event) => props.setWidth(event.target.value)}
@@ -34,6 +33,6 @@ export default function RoomTool(props) {
             <button className="control-button" onClick={props.onClose}>
                 отмена
             </button>
-        </>
+        </span>
     );
 }
