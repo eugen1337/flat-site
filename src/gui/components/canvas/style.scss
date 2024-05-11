@@ -1,7 +1,7 @@
 .send-button {
     position: absolute;
     border: none;
-    background-color: rgb(119, 0, 255);
+    background-color: rgb(218, 196, 196);
     height: 40px;
     width: 150px;
     border-radius: 20px;
@@ -9,16 +9,34 @@
     bottom: 10px;
 
     &:hover {
-        background-color: rgb(119, 0, 255);
-        filter: invert(100%);
+        background-color: rgb(97, 57, 143);
     }
 }
 
-.tool-box {
+.tool {
     position: absolute;
     top: 50px;
     right: 0;
-    max-width: 300px;
+    width: 200px;
+    margin: 10px;
+    padding: 10px;
     display: flex;
     flex-direction: column;
+    background-color: rgb(179, 179, 179);
+    border-radius: 10px;
+    box-shadow: -10px 10px 15px;
+
+    button {
+        color: white;
+        background-color: rgb(78, 74, 94);
+        border-radius: 10px;
+
+        &:hover {
+            background-color: rgb(5, 0, 82);
+        }
+    }
+
+    input{
+        width: 100%;
+    }
 }

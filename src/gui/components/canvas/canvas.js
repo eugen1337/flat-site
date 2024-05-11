@@ -31,6 +31,8 @@ export default function Canvas() {
     const [length, setLength] = useState(0);
     const [width, setWidth] = useState(0);
     const [time, setTime] = useState("");
+    const [totalArea, setTotalArea] = useState(0);
+    const [totalPerimeter, setTotalPerimeter] = useState(0);
 
     const [isToolActive, setIsToolActive] = useState(false);
     const [usedTool, setUsedTool] = useState("room");
@@ -60,13 +62,16 @@ export default function Canvas() {
             console.log(val);
             const result = JSON.parse(val);
             setTime(result.date ?? "");
-            if (result.area) {
-                createSquare(result.area);
+
+            if (result.area && result.perimeter) {
+                createSquare(result.area, result.perimeter);
+                setTotalArea(totalArea + Number(result.area));
+                setTotalPerimeter(totalPerimeter + Number(result.perimeter));
             }
         }
     }, [val]);
 
-    const createSquare = (area) => {
+    const createSquare = (area, perimeter) => {
         incrementId();
         setSquares([
             ...squares,
@@ -75,6 +80,7 @@ export default function Canvas() {
                 length,
                 width,
                 area,
+                perimeter,
             },
         ]);
         console.log({
@@ -82,7 +88,7 @@ export default function Canvas() {
             length,
             width,
             area,
-        })
+        });
         setIsToolActive(false);
     };
 
@@ -105,6 +111,9 @@ export default function Canvas() {
         setLength(0);
         setWidth(0);
         setSquares([]);
+        setIsToolActive(false);
+        setTotalArea(0);
+        setTotalPerimeter(0);
     };
 
     const send = () => {
@@ -136,41 +145,45 @@ export default function Canvas() {
                             setTool={setUsedTool}
                             create={create}
                         ></ToolBar>
-                        <MessageBox time={time}></MessageBox>
+                        <MessageBox
+                            totalArea={totalArea}
+                            totalPerimeter={totalPerimeter}
+                            time={time}
+                        ></MessageBox>
                     </Html>
                     {squares.map((square) => (
                         <Room key={square.id} square={square}></Room>
                     ))}
                 </Layer>
             </Stage>
-            <Toolbox>
-                {usedTool === "room" && isToolActive && (
-                    <RoomTool
-                        createSquare={() => getArea(length, width)}
-                        length={length}
-                        width={width}
-                        setLength={setLength}
-                        setWidth={setWidth}
-                        onClose={() => {
-                            setLength(0);
-                            setWidth(0);
-                            setIsToolActive(false);
-                        }}
-                    ></RoomTool>
-                )}
-                {usedTool === "wall" && isToolActive && (
-                    <WallTool
-                        createWall={createWall}
-                        length={length}
-                        setLength={setLength}
-                        onClose={() => {
-                            setLength(0);
-                            setWidth(0);
-                            setIsToolActive(false);
-                        }}
-                    ></WallTool>
-                )}
-            </Toolbox>
+
+            {usedTool === "room" && isToolActive && (
+                <RoomTool
+                    createSquare={() => getArea(length, width)}
+                    length={length}
+                    width={width}
+                    setLength={setLength}
+                    setWidth={setWidth}
+                    onClose={() => {
+                        setLength(0);
+                        setWidth(0);
+                        setIsToolActive(false);
+                    }}
+                ></RoomTool>
+            )}
+            {usedTool === "wall" && isToolActive && (
+                <WallTool
+                    createWall={createWall}
+                    length={length}
+                    setLength={setLength}
+                    onClose={() => {
+                        setLength(0);
+                        setWidth(0);
+                        setIsToolActive(false);
+                    }}
+                ></WallTool>
+            )}
+
             <button className="send-button" onClick={send}>
                 Save data
             </button>

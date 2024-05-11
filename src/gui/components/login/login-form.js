@@ -47,7 +47,14 @@ export default function LoginForm(props) {
 
     return (
         <>
-            <div className="wrapper">
+            <div
+                className="wrapper"
+                onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                        queryLogin();
+                    }
+                }}
+            >
                 <h2>Authentification</h2>
                 <form action="#">
                     <div className="input-box">
