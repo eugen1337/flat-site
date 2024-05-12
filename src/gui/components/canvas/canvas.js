@@ -13,6 +13,7 @@ import {
     useRoomDispatcher,
     useSendPlan,
     useGetArea,
+    useSetPlan,
 } from "../../../state/api";
 
 import { useWs } from "../../../transport/ws";
@@ -22,17 +23,15 @@ import MessageBox from "../message-box/message-box";
 
 import "./style.scss";
 
-const Toolbox = (props) => {
-    return <span className="tool-box">{props.children}</span>;
-};
-
 export default function Canvas() {
     const [squares, setSquares] = useState([]);
     const [length, setLength] = useState(0);
     const [width, setWidth] = useState(0);
     const [time, setTime] = useState("");
+
     const [totalArea, setTotalArea] = useState(0);
     const [totalPerimeter, setTotalPerimeter] = useState(0);
+    const [coords, setCoords] = useState({});
 
     const [isToolActive, setIsToolActive] = useState(false);
     const [usedTool, setUsedTool] = useState("room");
@@ -47,9 +46,12 @@ export default function Canvas() {
 
     const sendPlan = useSendPlan();
     const setRoom = useRoomDispatcher();
+    const setPlan = useSetPlan();
     const getArea = useGetArea();
 
     const login = useLoginListener();
+
+    const defaultCoords = [400, 100];
 
     useEffect(() => {
         if (ready) {
@@ -72,6 +74,7 @@ export default function Canvas() {
     }, [val]);
 
     const createSquare = (area, perimeter) => {
+        const type = length === width ? "square" : "rectangle";
         incrementId();
         setSquares([
             ...squares,
@@ -81,29 +84,18 @@ export default function Canvas() {
                 width,
                 area,
                 perimeter,
+                type,
             },
         ]);
-        console.log({
-            id,
-            length,
-            width,
-            area,
-        });
+        setRoom(id, length, width, area, perimeter, type);
+        setCoords({ ...coords, [id]: defaultCoords });
+
+        setLength(0);
+        setWidth(0);
         setIsToolActive(false);
     };
 
     const createWall = () => {
-        // incrementId();
-        // setSquares([
-        //     ...squares,
-        //     {
-        //         id,
-        //         length,
-        //         width,
-        //     },
-        // ]);
-        // getArea(length, width);
-
         setIsToolActive(false);
     };
 
@@ -118,17 +110,25 @@ export default function Canvas() {
 
     const send = () => {
         console.log("send()");
-        setRoom({
-            type: "square",
-            level: 0,
-            length,
-            width,
-        });
-        sendPlan();
+        const rooms = [...squares];
+        const data = {
+            rooms: rooms.map((room) => {
+                return { ...room, coords: coords[room.id] };
+            }),
+            totalArea,
+            totalPerimeter,
+        };
+        console.log(data);
+        setPlan(data);
+        sendPlan(data);
     };
 
     const create = async () => {
         setIsToolActive(true);
+    };
+
+    const changeCoords = ([x, y], id) => {
+        setCoords({ ...coords, [id]: [x, y] });
     };
 
     return (
@@ -152,7 +152,12 @@ export default function Canvas() {
                         ></MessageBox>
                     </Html>
                     {squares.map((square) => (
-                        <Room key={square.id} square={square}></Room>
+                        <Room
+                            key={square.id}
+                            square={square}
+                            coords={coords[square.id]}
+                            setCoords={changeCoords}
+                        ></Room>
                     ))}
                 </Layer>
             </Stage>

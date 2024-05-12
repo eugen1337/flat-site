@@ -9,6 +9,7 @@ import {
     incrementId,
     setRoom as setRoomAction,
     sendPlan as sendPlanAction,
+    setPlan
 } from "./redux/slices/planReducer.js";
 import { sendRoom } from "../transport/api.js";
 
@@ -74,4 +75,9 @@ export function useRoomDispatcher() {
 export function useGetArea() {
     const token = useSelector((state) => state.auth.token);
     return (length, width) => sendRoom({ token: token, length, width });
+}
+
+export function useSetPlan() {
+    const dispatch = useDispatch();
+    return (plan) => dispatch(setPlan(plan));
 }

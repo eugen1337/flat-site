@@ -45,7 +45,7 @@ export async function register({ login, password }) {
 export async function send({ token, data }) {
     console.log("fetch /plans");
 
-    const result = await getResponse(`${baseUrl}/plans/rooms`, {
+    const result = await getResponse(`${baseUrl}/plans`, {
         method: "POST",
         headers: {
             Authorization: `Bearer ${token}`,

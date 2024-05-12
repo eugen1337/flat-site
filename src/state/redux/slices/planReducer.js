@@ -6,13 +6,13 @@ const initialState = {
     id: 1,
     plan: {},
     status: "",
-    room: {},
+    rooms: [],
 };
 
 const sendPlan = createAsyncThunk(
     "planSlice/sendPlan",
     async (empty, thunkAPI) => {
-        const data = thunkAPI.getState().plan.room;
+        const data = thunkAPI.getState().plan.plan;
 
         const result = await send({
             token: thunkAPI.getState().auth.token,
@@ -36,7 +36,11 @@ const planSlice = createSlice({
             state.id = state.id + 1;
         },
         setRoom(state, action) {
-            state.room = action.payload;
+            // state.rooms = [...state.rooms, action.payload];
+        },
+        setCoords(state, action) {},
+        setPlan(state, action) {
+            state.plan = action.payload;
         },
     },
     extraReducers: (builder) => {
@@ -51,5 +55,5 @@ const planSlice = createSlice({
     },
 });
 export { sendPlan };
-export const { incrementId, setRoom } = planSlice.actions;
+export const { incrementId, setRoom, setPlan } = planSlice.actions;
 export default planSlice.reducer;

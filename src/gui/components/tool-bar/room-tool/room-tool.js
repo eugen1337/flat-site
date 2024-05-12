@@ -1,14 +1,28 @@
 import "./style.scss";
 
-export default function RoomTool(props) {
+export default function RoomTool({
+    createSquare,
+    length,
+    setLength,
+    width,
+    setWidth,
+    onClose,
+}) {
     return (
-        <span className="tool">
+        <span
+            className="tool"
+            onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                    createSquare();
+                }
+            }}
+        >
             <label className="control-input">
                 длина(в см)
                 <input
-                    value={props.length}
+                    value={length}
                     onChange={(event) => {
-                        props.setLength(event.target.value);
+                        setLength(event.target.value);
                     }}
                     type="number"
                     min={100}
@@ -19,18 +33,18 @@ export default function RoomTool(props) {
             <label className="control-input">
                 ширина(в см)
                 <input
-                    value={props.width}
-                    onChange={(event) => props.setWidth(event.target.value)}
+                    value={width}
+                    onChange={(event) => setWidth(event.target.value)}
                     type="number"
                     min={100}
                     max={30000}
                     required
                 />
             </label>
-            <button className="control-button" onClick={props.createSquare}>
+            <button className="control-button" onClick={createSquare}>
                 создать комнату
             </button>
-            <button className="control-button" onClick={props.onClose}>
+            <button className="control-button" onClick={onClose}>
                 отмена
             </button>
         </span>
