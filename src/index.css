@@ -6,7 +6,8 @@ body {
     font-family: luminari, cursive;
     font-weight: 400;
     color: #242424;
-    background: #fff;
+    background-color: #d0cccc;
+    backdrop-filter: blur(10px);
 }
 
 .main {

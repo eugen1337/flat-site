@@ -19,7 +19,7 @@
     right: 0;
     width: 200px;
     margin: 10px;
-    padding: 10px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     background-color: rgb(179, 179, 179);
@@ -30,6 +30,7 @@
         color: white;
         background-color: rgb(78, 74, 94);
         border-radius: 10px;
+        margin-top: 10px;
 
         &:hover {
             background-color: rgb(5, 0, 82);
