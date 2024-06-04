@@ -4,15 +4,20 @@
     margin: auto;
     padding: 50px;
 
-    background-image: url("../../../../public/back_new.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
+    // background-image: url("../../../../public/back.jpg");
+    // background-repeat: no-repeat;
+    // background-size: contain;
+    // background-position: center;
+
+    // backdrop-filter: blur(10px);
 
     h1 {
+        font-size: 60px;
         text-align: center;
     }
 
     p {
+        font-size: 20px;
         text-align: center;
     }
 }

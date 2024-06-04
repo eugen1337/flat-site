@@ -1,0 +1,49 @@
+.bar {
+  border-radius: 10px;
+  background-color: rgba(197, 190, 238, 0.938);
+  border: 2px solid rgb(0, 0, 0);
+  box-shadow: -5px 10px 15px;
+  margin: 10px;
+  padding: 10px;
+  width: 150px;
+  display: inline flex;
+
+  flex-direction: column;
+  flex-flow: column;
+
+  .tools-label {
+    text-align: center;
+    font-size: 40px;
+  }
+
+  button:hover {
+    background: linear-gradient(
+      90deg,
+      hsl(251, 77%, 63%),
+      #ffffff,
+      hsl(251, 77%, 63%)
+    );
+    /* background: linear-gradient(90deg, rgb(60, 255, 0), #fd0579); */
+  }
+
+  button {
+    font-size: 15px;
+    margin-top: 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: rgba(126, 131, 190, 0.89);
+    transition: all 400ms ease;
+  }
+
+  select {
+    margin: 10px;
+    background-color: rgb(232, 241, 246);
+    border: 2px solid rgb(70, 70, 70);
+    padding: 0 20px 0 10px;
+  }
+}
+
+.tools-label {
+  text-align: center;
+  font-size: 40px;
+}

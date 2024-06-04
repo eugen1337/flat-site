@@ -74,3 +74,37 @@ export async function sendRoom({ token, length, width }) {
     console.log(result);
     return result;
 }
+
+export async function getFlat({ token, id }) {
+    console.log("fetch /plans/flats");
+
+    const result = await getResponse(
+        `${baseUrl}/plans/area?id=${id}`,
+        {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        }
+    );
+
+    console.log(result);
+    return result;
+}
+
+export async function getFlatList({ token }) {
+    console.log("fetch /plans");
+
+    const result = await getResponse(
+        `${baseUrl}/plans`,
+        {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        }
+    );
+
+    console.log(result);
+    return result;
+}
