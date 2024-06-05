@@ -97,3 +97,7 @@ export function useGetFlatList() {
 export function useFlatListListener() {
   return useSelector((state) => state.plan.flatList);
 }
+
+export function usePlanListener() {
+  return useSelector((state) => state.plan.plan);
+}

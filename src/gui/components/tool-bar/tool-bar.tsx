@@ -18,7 +18,7 @@ const ToolBar: FC<Props> = ({ load, usedTool, setTool, clear, create }) => {
         onChange={(e) => setTool(e.target.value)}
         className="tool-bar"
       >
-        {["room", "wall"].map((tool: string) => (
+        {["room"].map((tool: string) => (
           <option key={tool} value={tool}>
             {tool}
           </option>

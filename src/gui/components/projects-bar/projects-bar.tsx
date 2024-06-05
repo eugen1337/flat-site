@@ -2,9 +2,12 @@ import "./style.scss";
 import { useFlatListListener, useGetFlat } from "../../../state/api";
 import { FC, useState } from "react";
 
-type Props = { setIsVisible: (flag: boolean) => void };
+type Props = {
+  setIsVisible: (flag: boolean) => void;
+  load: () => void;
+};
 
-const ProjectsBar: FC<Props> = ({ setIsVisible }) => {
+const ProjectsBar: FC<Props> = ({ setIsVisible, load }) => {
   const flatList = useFlatListListener();
   const getFlat = useGetFlat();
   const [id, setId] = useState<string>(flatList[0]);
@@ -32,6 +35,7 @@ const ProjectsBar: FC<Props> = ({ setIsVisible }) => {
         onClick={() => {
           getFlat(id);
           setIsVisible(true);
+          load();
         }}
       >
         load

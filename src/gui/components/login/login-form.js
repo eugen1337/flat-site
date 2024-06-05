@@ -7,6 +7,7 @@ import {
   useLoginListener,
   usePasswordDispatcher,
   usePasswordListener,
+  useResetUserInfo,
   useTokenListener,
   useTokenStatusListener,
 } from "../../../state/api.js";
@@ -24,12 +25,14 @@ export default function LoginForm(props) {
   const getToken = useGetToken();
   const token = useTokenListener();
   const status = useTokenStatusListener();
+  const resetUser = useResetUserInfo();
 
   useEffect(() => {
     if (status === "OK") navigate("/main-page");
     else if (status === "BAD") {
       console.log("bad status");
       alert(token);
+      resetUser();
     }
   }, [token, status, navigate]);
 
@@ -57,7 +60,7 @@ export default function LoginForm(props) {
       >
         <div className="logo-text">
           <img src="./logo.jpg" alt="logo" className="logo" />
-          <span>Flat plan with cat.com</span>
+          <span>CatPlan.com</span>
         </div>
         <form action="#">
           <div className="input-box">

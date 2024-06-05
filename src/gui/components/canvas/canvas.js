@@ -14,6 +14,7 @@ import {
   useGetArea,
   useSetPlan,
   useGetFlatList,
+  usePlanListener,
 } from "../../../state/api";
 
 import { useWs } from "../../../transport/ws";
@@ -54,6 +55,8 @@ export default function Canvas() {
   const getArea = useGetArea();
   const getFlatList = useGetFlatList();
 
+  // loaded plan
+  const plan = usePlanListener();
   const login = useLoginListener();
 
   const defaultCoords = [400, 100];
@@ -77,8 +80,8 @@ export default function Canvas() {
 
       if (result.area && result.perimeter) {
         createSquare(result.area, result.perimeter);
-        setTotalArea(totalArea + Number(result.area));
-        setTotalPerimeter(totalPerimeter + Number(result.perimeter));
+        setTotalArea(totalArea + +result.area.replace(",", "."));
+        setTotalPerimeter(totalPerimeter + +result.perimeter.replace(",", "."));
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -126,13 +129,27 @@ export default function Canvas() {
       rooms: rooms.map((room) => {
         return { ...room, coords: coords[room.id] };
       }),
-      totalArea,
-      totalPerimeter,
+      totalArea: totalArea.toString().replace(".", ","),
+      totalPerimeter: totalPerimeter.toString().replace(".", ","),
     };
     console.log(data);
     setPlan(data);
-    sendPlan(data);
+    sendPlan();
     getFlatList();
+  };
+
+  const load = () => {
+    console.log(plan);
+    setTotalArea(plan.totalArea);
+    setTotalPerimeter(plan.totalPerimeter);
+    incrementId();
+    setSquares(
+      plan.rooms.map((room) => {
+        const roomId = room.coords[0] + room.coords[1] + id;
+        setCoords({ ...coords, [roomId]: [+room.coords[0], +room.coords[1]] });
+        return { ...room, id: roomId };
+      })
+    );
   };
 
   const create = async () => {
@@ -176,7 +193,6 @@ export default function Canvas() {
           </Layer>
         </Stage>
       )}
-
       {usedTool === "room" && isToolActive && (
         <RoomTool
           createSquare={() => getArea(length, width)}
@@ -203,12 +219,14 @@ export default function Canvas() {
           }}
         ></WallTool>
       )}
-
-      {!isVisible && <ProjectsBar setIsVisible={setIsVisible}></ProjectsBar>}
-
-      <button className="send-button" onClick={send}>
-        Save data
-      </button>
+      {!isVisible && (
+        <ProjectsBar setIsVisible={setIsVisible} load={load}></ProjectsBar>
+      )}
+      {squares.length > 0 && (
+        <button className="send-button" onClick={send}>
+          Save data
+        </button>
+      )}
     </>
   );
 }

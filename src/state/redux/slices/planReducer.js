@@ -7,7 +7,7 @@ const initialState = {
   plan: {},
   status: "",
   rooms: [],
-  flatList: []
+  flatList: [],
 };
 
 const sendPlan = createAsyncThunk(
@@ -21,6 +21,8 @@ const sendPlan = createAsyncThunk(
     });
 
     const jsonRes = JSON.parse(result);
+
+    console.log(jsonRes);
 
     if (jsonRes.status === "OK") {
       return jsonRes.data;
@@ -51,7 +53,7 @@ const getFlatThunk = createAsyncThunk(
     });
     const jsonRes = JSON.parse(result);
 
-    return jsonRes.data;
+    return jsonRes;
   }
 );
 
@@ -85,10 +87,11 @@ const planSlice = createSlice({
       })
 
       .addCase(getFlatThunk.fulfilled, (state, action) => {
-        state.status = action.payload;
+        state.plan = action.payload;
       });
   },
 });
+
 export { sendPlan, getFlatThunk, getFlatListThunk };
 export const { incrementId, setRoom, setPlan } = planSlice.actions;
 export default planSlice.reducer;

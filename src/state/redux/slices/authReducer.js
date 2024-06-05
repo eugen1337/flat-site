@@ -16,7 +16,7 @@ const getToken = createAsyncThunk(
             login: thunkAPI.getState().auth.login,
             password: thunkAPI.getState().auth.password,
         };
-        const result = await (
+        const result = await (  
             await import("../../../transport/api.js")
         )[option](user);
 

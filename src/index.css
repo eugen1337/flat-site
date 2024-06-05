@@ -7,7 +7,7 @@ body {
     font-weight: 400;
     color: #242424;
     background-color: #d0cccc;
-    backdrop-filter: blur(10px);
+    /* backdrop-filter: blur(10px); */
 }
 
 .main {
